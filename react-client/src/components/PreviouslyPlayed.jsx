@@ -7,11 +7,12 @@ import SingleSongInfo from './SingleSongInfo.jsx';
 //FOR EACH PASSED DOWN STATE, RENDER THE SONG
 
 function PreviouslyPlayed(props) {
-  if (typeof props.previousSongs != "undefined") {
+  const { previousSongs } = props;
+  if (typeof previousSongs != "undefined") {
     return (
       <div>
         <h1>PREVIOUSLY PLAYED</h1>
-        {props.previousSongs.map((song, index) => {
+        {previousSongs.map((song, index) => {
           return <SingleSongInfo song={song} key={index}/>
         })}
       </div>

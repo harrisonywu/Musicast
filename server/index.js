@@ -1,19 +1,33 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 var songs = require('../database-mongo');
 
 var app = express();
 
-// UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
-// UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
+
+// client id created for Musicast
+let my_client_id = '912029191f5f4b8381601e3fadd0adca';
+
+// consider removing this and running it in the terminal
+let my_client_secret = '6e6179d1041541e99b33694f2a3679f8';
+let redirect_uri = 'http://localhost:3000'
+
+
+//This will redirect to a specified uri, and will return a query string (parameters) that can be used... how?
+app.get('/login', function(req, res) {
+  var scopes = 'user-read-private user-read-email';
+  res.redirect('https://accounts.spotify.com/authorize' +
+    '?response_type=code' +
+    '&client_id=' + my_client_id +
+    (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+    '&redirect_uri=' + encodeURIComponent(redirect_uri));
+  });
+
 
 app.get('/previousSongs', function (req, res) {
   songs.selectAll(function(err, data) {
@@ -26,15 +40,14 @@ app.get('/previousSongs', function (req, res) {
 });
 
 app.post('/saveSong', (req, res) => {
-  console.log('BODY: ', req.body)
   songs.saveOne(req.body, (err, success) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send('successoooo')
-    }
+    err ? console.log("Error saving song", err) : res.send('successfully saved song.')
+  //   if (err) {
+  //     console.log(err)
+  //   } else {
+  //     res.send('successfully saved song.')
+  //   }
   })
-  res.end();
 })
 
 app.listen(3000, function() {

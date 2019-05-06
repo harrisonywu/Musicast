@@ -5,8 +5,9 @@ function SingleSongInfo(props) {
   return (
     <div>
       <div>
-        {console.log('the thingy: ', songName)}
-        {songName} by {artistName} from the album {albumName}
+        <div>Song: {songName}</div>
+        <div>Artist: {artistName}</div>
+        <div>Album: {albumName}</div>
       </div>
       <img src={albumImg}></img>
     </div>

@@ -2,13 +2,14 @@ import React from 'react';
 
 
 function CurrentSong(props) {
+  const { currentSongInfo } = props;
   if (typeof props.currentSongInfo != 'undefined') {
     return (
       <div>
         <h1>CURRENT SONG</h1>
-        <div>{props.currentSongInfo.name} by {props.currentSongInfo.album.artists[0].name}</div>
-        {console.log(props.currentSongInfo.album.images.url)}
-        <img src={props.currentSongInfo.album.images[2].url}></img>
+        <div>{currentSongInfo.name} by {currentSongInfo.album.artists[0].name}</div>
+        {console.log(currentSongInfo.album.images.url)}
+        <img src={currentSongInfo.album.images[2].url}></img>
       </div>
     )
   } else {
