@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import PreviouslyPlayed from './components/PreviouslyPlayed.jsx';
-import SongSubmit from './components/SongSubmit.jsx';
 import CurrentSong from './components/CurrentSong.jsx';
 import access_token from './config/spotify_access_token.js';
+import styles from './css/index.css'
+
 
 class App extends React.Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class App extends React.Component {
           .then((audioAnalysis) => {
             this.setState({
               audioAnalysis: audioAnalysis.data,
+              tempo: audioAnalysis.data.track.tempo
             })
           })
           .catch(() => alert('Trouble grabbing song Audio Analysis'))
@@ -73,10 +75,10 @@ class App extends React.Component {
 
   render () {
     return (
-    <div>
-      <PreviouslyPlayed previousSongs={this.state.allSongs}/>
-      <CurrentSong currentSongInfo={this.state.currentSong}/>
-      <button onClick={this.grabCurrentlyPlayingSong}></button>
+    <div> 
+      <button onClick={this.grabCurrentlyPlayingSong}>What are you listening to right now?</button>
+      <CurrentSong className='CurrentSong' currentSongInfo={this.state.currentSong} tempo = {this.state.tempo}/>
+      <PreviouslyPlayed className='PreviouslyPlayed' previousSongs={this.state.allSongs}/>
     </div>)
   }
 }

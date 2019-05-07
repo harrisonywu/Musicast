@@ -1,16 +1,23 @@
 import React from 'react';
-
-
+import {Animated} from "react-animated-css";
+import styles from '../css/CurrentSong.css';
+ 
 function CurrentSong(props) {
-  const { currentSongInfo } = props;
+  const { currentSongInfo, tempo } = props;
   if (typeof props.currentSongInfo != 'undefined') {
     return (
-      <div>
-        <h1>CURRENT SONG</h1>
-        <div>{currentSongInfo.name} by {currentSongInfo.album.artists[0].name}</div>
-        {console.log(currentSongInfo.album.images.url)}
-        <img src={currentSongInfo.album.images[2].url}></img>
-      </div>
+      <Animated animationIn="bounceIn" animationOut="bounceOut" isVisible={true}>
+        <div >
+          <h1>CURRENT SONG</h1>
+          <div className ='current-song-container'>
+            <img src={currentSongInfo.album.images[2].url}></img>
+            <div>
+              <div className='current-song-info'>{currentSongInfo.name} by {currentSongInfo.album.artists[0].name}</div>
+              <div> Tempo: {tempo}</div>
+            </div>
+          </div>
+        </div>
+      </Animated>
     )
   } else {
     return (
