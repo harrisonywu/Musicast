@@ -1,8 +1,11 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var songs = require('../database-mongo');
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const songs = require('../database-mongo');
 
 var app = express();
+
+app.use(morgan('dev'))
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -19,6 +22,7 @@ let redirect_uri = 'http://localhost:3000'
 
 
 //This will redirect to a specified uri, and will return a query string (parameters) that can be used... how?
+// currently not being hit
 app.get('/login', function(req, res) {
   var scopes = 'user-read-private user-read-email';
   res.redirect('https://accounts.spotify.com/authorize' +
