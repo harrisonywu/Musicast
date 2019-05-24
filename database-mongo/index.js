@@ -60,5 +60,6 @@ var saveOne = function(data, callback) {
   }) 
 }
 
-module.exports.selectAll = selectAll;
-module.exports.saveOne = saveOne;
+module.exports = { selectAll, saveOne }
+// module.exports.selectAll = selectAll;
+// module.exports.saveOne = saveOne;
