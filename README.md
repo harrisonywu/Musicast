@@ -1,3 +1,5 @@
+# MUSICAST
+
 # Description
   A music player that can play Spotify audio through the browser, save your previously played songs, and use the current playing track's audio analysis to create lights that flash to the beat.
 
@@ -8,3 +10,4 @@
     npm install
     npm start
   ```
+  3. Go to localhost:3000!
