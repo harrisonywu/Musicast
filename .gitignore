@@ -2,8 +2,11 @@
 #node modules
 node_modules
 
-#config
+#track data token
 react-client/src/config
 
 #bundle
 react-client/dist/bundle.js
+
+#webplayer toekn
+react-client/dist/config
