@@ -77,12 +77,19 @@ class App extends React.Component {
             currentSong: songInfo.data,
           })
           axios.post('/saveSong', songInfo.data)
-            .then(() => Swal.fire({
-              type: 'success',
-              text: 'New song saved to database!',
-            }))
+            .then(() => 
+              Swal.fire({
+                type: 'success',
+                text: 'New song saved to database!',
+              })
+            )
         })
-        .catch(() => Swal.fire('Trouble getting song information.'))
+        .catch(() => 
+          Swal.fire({
+            type: 'error',
+            text: 'Trouble getting song information.',
+          })
+        );
       })
       .then(() => {
         grabPlayingSong.get(`https://api.spotify.com/v1/audio-analysis/${this.state.currentURI}`)
@@ -92,7 +99,12 @@ class App extends React.Component {
               tempo: audioAnalysis.data.track.tempo
             })
           })
-          .catch(() => Swal.fire('Trouble grabbing song Audio Analysis'))
+          .catch(() => 
+            Swal.fire({
+              type: 'error',
+              text: 'Trouble grabbing track analysis.',
+            })
+          )
       })
   }
 
