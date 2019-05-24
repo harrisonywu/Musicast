@@ -1,3 +1,20 @@
+html * {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+h1 {
+  color: yellow
+}
+
+h2 {
+  font-size: 40px;
+  /* margin-left: 100px; */
+}
+
 .CurrentSong {
   color: red
 }

@@ -1,3 +1,7 @@
 .single-song-container {
   display: flex;
 }
+
+img {
+  margin-right: 15px;
+}
