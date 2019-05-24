@@ -21,7 +21,6 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
-    "angular": "^1.6.3",
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "body-parser": "^1.17.2",
@@ -34,6 +33,7 @@
     "react-animated-css": "^1.0.5",
     "react-dom": "^15.4.2",
     "styled-components": "^4.2.0",
-    "sweetalert2": "^8.11.5"
+    "sweetalert2": "^8.11.5",
+    "webpack-cli": "^3.3.2"
   }
 }
