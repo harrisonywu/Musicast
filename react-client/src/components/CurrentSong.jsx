@@ -10,7 +10,7 @@ function CurrentSong(props) {
         <div >
           <h1>CURRENT SONG</h1>
           <div className ='current-song-container'>
-            <img src={currentSongInfo.album.images[2].url}></img>
+            <img src={currentSongInfo.album.images[1].url}></img>
             <div>
               <div className='current-song-info'>{currentSongInfo.name} by {currentSongInfo.album.artists[0].name}</div>
               <div>Tempo: {tempo}</div>

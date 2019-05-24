@@ -1,7 +1,5 @@
-.current-song-info {
-
-}
 
 .current-song-container {
+  font-size: 50px;
   display: flex;
 }
