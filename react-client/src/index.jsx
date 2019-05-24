@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import $ from 'jquery';
 
 import PreviouslyPlayed from './components/PreviouslyPlayed.jsx';
 import CurrentSong from './components/CurrentSong.jsx';
 import access_token from './config/spotify_access_token.js';
-import { tween, styler, easing } from 'popmotion';
+import { tween, styler, easing, everyFrame } from 'popmotion';
 import styles from './css/index.css'
 
 
@@ -15,11 +16,12 @@ class App extends React.Component {
     super(props);
     this.state = { 
       currentURI: '',
+      visualizerCalled: false,
     }
 
     this.changeURI = this.changeURI.bind(this);
     this.grabCurrentlyPlayingSong = this.grabCurrentlyPlayingSong.bind(this);
-    this.tweenTest = this.tweenTest.bind(this);
+    this.visualizer = this.visualizer.bind(this);
   }
 
   componentDidMount() {
@@ -37,21 +39,29 @@ class App extends React.Component {
     })
   }
 
-  tweenTest(tempo) {
-    // const counter = document.querySelector('.counter');
-    // const updateCounter = (v) => counter.innerHTML = v;
-    // tween({to: tempo, duration:500}).start(updateCounter);
-    console.log('tween test run')
-    const ball = document.querySelector('.counter');
-    const ballStyler = styler(ball);
-
-    tween({
-      from: { x: 0, scale: 1 },
-      to: { x: 300, scale: 2 },
-      ease: easing.easeInOut,
-      flip: Infinity,
-      duration: 1000
-    }).start(v => ballStyler.set(v));
+  visualizer(visualizerCalled) {
+    if (!visualizerCalled) {
+      var divsize = ((Math.random()*100) + 50).toFixed();
+      var color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
+      let $newdiv = $('<div/>').css({
+          'width':divsize+'px',
+          'height':divsize+'px',
+          'background-color': color
+      });
+  
+      var posx = (Math.random() * ($(document).width() - divsize)).toFixed();
+      var posy = (Math.random() * ($(document).height() - divsize)).toFixed();
+  
+      $newdiv.css({
+        'position':'absolute',
+        'left':posx+'px',
+        'top':posy+'px',
+        'display':'none'
+      }).appendTo( 'body' ).fadeIn(100).delay(1000).fadeOut(500, function(){
+      $(this).remove();
+      })
+      this.setState({visualizerCalled: true})
+    }
   }
 
   grabCurrentlyPlayingSong() {
@@ -105,15 +115,21 @@ class App extends React.Component {
               text: 'Trouble grabbing track analysis.',
             })
           )
-      })
-  }
+      });
+  };
 
   render () {
     return (
     <div>
       <h1>MUSICAST</h1>
       <button onClick={this.grabCurrentlyPlayingSong}>What are you listening to right now?</button>
-      <CurrentSong className='CurrentSong' currentSongInfo={this.state.currentSong} tempo = {this.state.tempo} tweenTest = {this.tweenTest}/>
+      <CurrentSong 
+        className='CurrentSong'
+        currentSongInfo={this.state.currentSong}
+        tempo={this.state.tempo}
+        visualizer={this.visualizer}
+        visualizerCalled={this.state.visualizerCalled}
+        />
       <PreviouslyPlayed className='PreviouslyPlayed' previousSongs={this.state.allSongs}/>
     </div>)
   }

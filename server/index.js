@@ -22,7 +22,7 @@ let redirect_uri = 'http://localhost:3000'
 
 
 //This will redirect to a specified uri, and will return a query string (parameters) that can be used... how?
-// currently not being hit
+// currently not being used
 app.get('/login', function(req, res) {
   var scopes = 'user-read-private user-read-email';
   res.redirect('https://accounts.spotify.com/authorize' +
@@ -46,11 +46,6 @@ app.get('/previousSongs', function (req, res) {
 app.post('/saveSong', (req, res) => {
   songs.saveOne(req.body, (err, success) => {
     err ? console.log("Error saving song", err) : res.send('successfully saved song.')
-  //   if (err) {
-  //     console.log(err)
-  //   } else {
-  //     res.send('successfully saved song.')
-  //   }
   })
 })
 

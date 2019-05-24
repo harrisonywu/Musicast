@@ -18,3 +18,8 @@ h2 {
 .CurrentSong {
   color: red
 }
+
+.balls {
+  display: flex;
+  margin-left: 10px;
+}
