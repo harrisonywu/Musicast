@@ -19,6 +19,7 @@ class App extends React.Component {
       visualizerCalled: false,
     }
 
+    this.authentication = this.authentication.bind(this);
     this.changeURI = this.changeURI.bind(this);
     this.grabCurrentlyPlayingSong = this.grabCurrentlyPlayingSong.bind(this);
     this.visualizer = this.visualizer.bind(this);
@@ -30,6 +31,13 @@ class App extends React.Component {
         this.setState({
           allSongs: allSongs.data,
         })
+      })
+  }
+
+  authentication() {
+    axios.get('/login')
+      .then((returnedLoginInfo) => {
+        console.log('return', returnedLoginInfo)
       })
   }
 

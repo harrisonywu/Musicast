@@ -1,7 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const songs = require('../database-mongo');
+const port = process.env.PORT || 3004;
 
 var app = express();
 
@@ -18,17 +20,18 @@ let my_client_id = '912029191f5f4b8381601e3fadd0adca';
 
 // consider removing this and running it in the terminal
 let my_client_secret = '6e6179d1041541e99b33694f2a3679f8';
-let redirect_uri = 'http://localhost:3000'
+let redirect_uri = `http://localhost:${port}`
 
 
 //This will redirect to a specified uri, and will return a query string (parameters) that can be used... how?
 // currently not being used
 app.get('/login', function(req, res) {
-  var scopes = 'user-read-private user-read-email';
+  console.log('login route')
+  // var scopes = 'user-read-private user-read-email';
   res.redirect('https://accounts.spotify.com/authorize' +
     '?response_type=code' +
     '&client_id=' + my_client_id +
-    (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+    // (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
     '&redirect_uri=' + encodeURIComponent(redirect_uri));
   });
 
@@ -49,7 +52,7 @@ app.post('/saveSong', (req, res) => {
   })
 })
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.listen(port, function() {
+  console.log(`listening on port ${port}!`);
 });
 
