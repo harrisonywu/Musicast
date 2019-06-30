@@ -5,9 +5,11 @@
 
 # Start this App
 1. Start MongoDB on your local machine.
-2. In the terminal run the following commands
+2. Make a copy of react-client/src/config/spotify_access_token.example.js and rename it spotify_access_token.js.
+3. Update token in the new file.
+4. In the terminal at the root directory of this project run the following commands.
   ```sh
     npm install
     npm start
   ```
-  3. Go to localhost:3000!
+5. Go to localhost:3004!

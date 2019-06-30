@@ -3,7 +3,7 @@
 node_modules
 
 #track data token
-react-client/src/config
+react-client/src/config/spotify_access_token.js
 
 #bundle
 react-client/dist/bundle.js
